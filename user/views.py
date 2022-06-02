@@ -13,7 +13,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('userapp:home')
+            return redirect('noteapp:home')
         else:
             print(request.POST)
             message = 'Information Incorrect or Already Exists'

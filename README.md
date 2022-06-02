@@ -2,12 +2,12 @@
 
 django note app with postgress sql
 
-# User Stroy of System
+# Some of Functional requirement of System
 
 - #01 The System allow the User Create Account in System to add your note and update , delete
 - #02 The System allow the User Delete Account , Update
 
-# 01 User story - description
+# 01 - description of functional requirment
 
 - The System allow the User Create Account
   Description : Can Create Account by Usernmae and first_name, last_name , email, password

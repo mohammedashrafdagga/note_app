@@ -1,27 +1,71 @@
 <section class="text-gray-600 body-font overflow-hidden">
-  <div class="container px-5 py-5 mx-auto">
-    <a
-      class="bg-gray-800 p-4 w-auto text-white border"
-      href="{% url 'noteapp:create-note' %}"
-      >Create Note</a
-    >
+  <div class="container px-5 py-5 mx-auto bg-gray-800 flex flex-col">
+    <span class="text-white mb-4">Actions in App </span>
+    <div class="flex flex-row">
+      <a
+        class="bg-gray-800 p-4 w-auto text-white border hover:bg-white hover:text-gray-800 mr-4"
+        href="{% url 'noteapp:create-note' %}"
+        >Create Note</a
+      >
+      <a
+        class="bg-gray-800 p-4 w-auto text-white border hover:bg-white hover:text-gray-800 mr-4"
+        href="{% url 'noteapp:create-category' %}"
+        >Create Category</a
+      >
+      <a
+        class="bg-gray-800 p-4 w-auto text-white border hover:bg-white hover:text-gray-800 mr-4"
+        href="{% url 'noteapp:category-page' %}"
+      >
+        Categories Pages
+      </a>
+    </div>
   </div>
+  {% if categories %}
+
+  <div class="container px-5 py-5 mx-auto bg-gray-800 mt-4 flex flex-col">
+    <span class="text-white mb-4">This is Your Categories</span>
+    <div class="flex flex-row">
+      {% for category in categories %}
+      <span
+        class="bg-gray-800 p-4 w-auto text-white border mr-4 hover:bg-white hover:text-gray-800"
+        >{{category}}</span
+      >
+
+      {% endfor %}
+    </div>
+  </div>
+
+  {% endif %}
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-wrap -m-12">
       <!-- check if have a note or not -->
 
-      {% for note in notes%}
-      <div class="p-12 md:w-1/2 flex flex-col items-start">
+      {% for note in notes %}
+      <!-- include -->
+
+      <div
+        class="p-12 md:w-1/3 flex flex-col items-between border bg-gray-800 text-white"
+      >
         <!-- <span
           class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest"
           >Create Another note</span
         > -->
         <h2
-          class="sm:text-3xl text-2xl title-font font-medium text-gray-900 mt-4 mb-4"
+          class="sm:text-3xl text-2xl title-font font-medium mt-4 mb-4 text-gray-200"
         >
           {{note.title}}
         </h2>
-        <p class="leading-relaxed mb-8">{{note.desc}}</p>
+        <div class="flex flex-col">
+          <p class="leading-relaxed mb-2 text-gray-200">{{note.desc}}</p>
+          <span class="bg-gray-800 mb-4 pr-4">
+            <p class="pb-2 pt-2 pr-2 bg-gray-800">Category:</p>
+            <p
+              class="leading-relaxed mb-4 p-2 bg-white text-gray-800 text-center font-bold"
+            >
+              {{note.category}}
+            </p>
+          </span>
+        </div>
 
         <a
           class="inline-flex items-center"
@@ -34,24 +78,22 @@
           />
           <span class="flex-grow flex flex-col pl-4">
             Author
-            <span class="title-font font-medium text-gray-900">
-              @{{user.username}}</span
-            >
+            <span class="title-font font-medium"> @{{user.username}}</span>
           </span>
-          <div class="ml-10 p-4">
+          <div class="ml-10 p-4 flex flex-row">
             <form method="POST" action="{% url 'noteapp:delete_note' %}">
               {% csrf_token %}
               <button
                 type="submit"
                 name="delete_id"
                 value="{{note.id}}"
-                class="bg-gray-800 text-white p-2 rounded border-none"
+                class="text-gray-200 p-2 mr-2 rounded border text-center"
               >
                 delete
               </button>
               <a
                 href="{% url 'noteapp:update-note' note.id %}"
-                class="bg-gray-800 text-white p-2 rounded border-none ml-2"
+                class="text-gray-200 p-2 rounded border text-center ml-2"
               >
                 Update
               </a>
@@ -59,7 +101,9 @@
           </div>
         </a>
       </div>
+      <!-- end fot -->
       {% endfor %}
+
       <!-- end for -->
     </div>
     <!-- when not have any note -->

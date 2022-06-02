@@ -5,7 +5,8 @@
 
 <!-- content -->
 {% block content %}
-<!-- start contentn -->
+
+<!-- when have compponent -->
 {% if notes %}
 <!-- include noteView -->
 {% include "components/noteView.html" %}
@@ -15,5 +16,6 @@
 {% include "components/noteEmpty.html" %}
 <!-- endif  -->
 {% endif %}
+
 <!-- end if and content -->
 {% endblock content %}
