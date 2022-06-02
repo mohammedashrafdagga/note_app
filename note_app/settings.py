@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user.apps.UserConfig',
+    'note.apps.NoteConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '20180496',
         'HOST': 'localhost',
-        'PORT': '5432', 
+        'PORT': '5432',
     }
 }
 
@@ -125,3 +127,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = 'noteapp:home'
+
+LOGOUT_REDIRECT_URL = 'login'

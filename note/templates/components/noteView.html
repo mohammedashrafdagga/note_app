@@ -1,0 +1,67 @@
+<section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-5 mx-auto">
+    <a
+      class="bg-gray-800 p-4 w-auto text-white border"
+      href="{% url 'noteapp:create-note' %}"
+      >Create Note</a
+    >
+  </div>
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-wrap -m-12">
+      <!-- check if have a note or not -->
+
+      {% for note in notes%}
+      <div class="p-12 md:w-1/2 flex flex-col items-start">
+        <!-- <span
+          class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest"
+          >Create Another note</span
+        > -->
+        <h2
+          class="sm:text-3xl text-2xl title-font font-medium text-gray-900 mt-4 mb-4"
+        >
+          {{note.title}}
+        </h2>
+        <p class="leading-relaxed mb-8">{{note.desc}}</p>
+
+        <a
+          class="inline-flex items-center"
+          href="{% url 'userapp:userprofile' user.username %}"
+        >
+          <img
+            alt="blog"
+            src="https://dummyimage.com/104x104"
+            class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
+          />
+          <span class="flex-grow flex flex-col pl-4">
+            Author
+            <span class="title-font font-medium text-gray-900">
+              @{{user.username}}</span
+            >
+          </span>
+          <div class="ml-10 p-4">
+            <form method="POST" action="{% url 'noteapp:delete_note' %}">
+              {% csrf_token %}
+              <button
+                type="submit"
+                name="delete_id"
+                value="{{note.id}}"
+                class="bg-gray-800 text-white p-2 rounded border-none"
+              >
+                delete
+              </button>
+              <a
+                href="{% url 'noteapp:update-note' note.id %}"
+                class="bg-gray-800 text-white p-2 rounded border-none ml-2"
+              >
+                Update
+              </a>
+            </form>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+      <!-- end for -->
+    </div>
+    <!-- when not have any note -->
+  </div>
+</section>

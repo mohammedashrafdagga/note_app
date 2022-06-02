@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+<!-- title block-->
+{% block title %} Home {% endblock title %}
+
+<!-- content -->
+{% block content %}
+<!-- start contentn -->
+{% if notes %}
+<!-- include noteView -->
+{% include "components/noteView.html" %}
+<!-- else -->
+{% else %}
+<!-- include note empty -->
+{% include "components/noteEmpty.html" %}
+<!-- endif  -->
+{% endif %}
+<!-- end if and content -->
+{% endblock content %}
